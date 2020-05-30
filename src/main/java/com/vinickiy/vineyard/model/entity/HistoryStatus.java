@@ -1,10 +1,7 @@
 package com.vinickiy.vineyard.model.entity;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 
 @Setter
@@ -14,9 +11,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "history_data")
-public class HistoryStatus{
+public class HistoryStatus extends BaseEntity{
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "canopy_id")
     private Canopy canopyId;
 
@@ -25,9 +22,5 @@ public class HistoryStatus{
 
     private String comments;
 
-    @Column(name = "TIME_CREATED", nullable = false, updatable = false)
-    @CreatedDate
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDateTime timeCreated;
 
 }
