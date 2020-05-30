@@ -1,4 +1,6 @@
+/*
 package com.vinickiy.vineyard.model.dto;
+
 
 import com.vinickiy.vineyard.model.entity.VineType;
 import lombok.AllArgsConstructor;
@@ -13,12 +15,14 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Row extends BaseDto{
+public class RowDto extends BaseDto{
+
 
     private Long id;
     private int rowNumber;
     private VineType typeName;
     private long bundleId;
 
-
 }
+
+*/

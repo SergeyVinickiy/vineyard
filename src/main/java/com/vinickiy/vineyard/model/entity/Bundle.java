@@ -13,12 +13,21 @@ import javax.persistence.*;
 @Table(name = "bundles")
 public class Bundle extends BaseEntity{
 
-    @Column(name = "bundle_id")
-    @OneToOne
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bundleId;
+
+    @ManyToOne
     @JoinColumn(name = "canopy_id")
     private Canopy canopyId;
 
     @Column(name = "canopy_number")
     private Integer canopySerialNumber;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private Row row;
+
+
 
 }

@@ -1,8 +1,8 @@
 package com.vinickiy.vineyard.model.entity;
 
 import lombok.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 
 
 @Setter
@@ -13,6 +13,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "vine_types")
 public class VineType extends BaseEntity{
+
+    @Id
+    @Column(name = "vine_type_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String vine_type;
 

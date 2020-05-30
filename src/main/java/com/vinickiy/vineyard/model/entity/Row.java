@@ -13,15 +13,17 @@ import javax.persistence.*;
 @Table(name = "rows")
 public class Row extends BaseEntity{
 
+    @Id
+    @Column(name = "row_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private Integer row_number;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     @JoinColumn(name = "vine_type_id")
     private VineType vineType;
 
-    @OneToOne
-    @JoinColumn(name = "bundle_id")
-    private Bundle bundle;
 
 }
