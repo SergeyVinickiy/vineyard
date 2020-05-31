@@ -21,7 +21,7 @@ public class RowDto extends BaseDto{
     private Long id;
     private int rowNumber;
     private VineType typeName;
-    private long bundleId;
+    private long id;
 
 }
 
