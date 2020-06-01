@@ -1,6 +1,5 @@
 package com.vinickiy.vineyard.model.entity;
 
-
 import lombok.*;
 import javax.persistence.*;
 
