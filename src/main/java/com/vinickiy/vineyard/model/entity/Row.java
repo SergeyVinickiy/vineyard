@@ -14,10 +14,11 @@ public class Row extends BaseEntity{
 
     private Integer row_number;
 
-    @ManyToOne(cascade = CascadeType.ALL,
+/*    @ManyToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "vine_type_id")
-    private VineType vineType;
+    @JoinColumn(name = "vine_type_id")*/
+//Need to add validation on the field
+    private String vineType;
 
 
 }

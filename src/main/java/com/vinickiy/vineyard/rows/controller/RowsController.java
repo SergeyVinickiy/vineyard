@@ -3,12 +3,9 @@ package com.vinickiy.vineyard.rows.controller;
 import com.vinickiy.vineyard.model.entity.Row;
 import com.vinickiy.vineyard.rows.services.RowsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 
 
@@ -25,11 +22,19 @@ public class RowsController {
 
     @PostMapping("/new")
     @ResponseStatus(CREATED)
-    public String createNewRow(@Valid @RequestBody Row Row, BindingResult result) {
+    public String createNewRow(@Valid @RequestBody Row Row) {
 
         Row savedRow = rowsService.save(Row);
         return "redirect:/rows/" + savedRow.getId();
 
-
     }
+
+
+    @GetMapping
+    public @ResponseBody
+    List<Row> getAllRows(){
+        return rowsService.findAllRows();
+    }
+
+
 }
