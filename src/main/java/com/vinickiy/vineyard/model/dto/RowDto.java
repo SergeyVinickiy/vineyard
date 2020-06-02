@@ -18,5 +18,7 @@ public class RowDto extends BaseDto{
     private int rowNumber;
     private VineType typeName;
 
+
+
 }
 
