@@ -22,10 +22,10 @@ public class RowsController {
 
     @PostMapping("/new")
     @ResponseStatus(CREATED)
-    public String createNewRow(@Valid @RequestBody Row Row) {
+    public @ResponseBody Row createNewRow(@Valid @RequestBody Row Row) {
 
         Row savedRow = rowsService.save(Row);
-        return "redirect:/rows/" + savedRow.getId();
+        return savedRow;
 
     }
 

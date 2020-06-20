@@ -19,6 +19,6 @@ public class VineType extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String vine_type;
+    private String vineType;
 
 }
