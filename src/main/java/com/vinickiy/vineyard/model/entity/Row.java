@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "rows")
 public class Row extends BaseEntity{
 
-    private Integer row_number;
+    private Integer rowNumber;
 
 /*    @ManyToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
