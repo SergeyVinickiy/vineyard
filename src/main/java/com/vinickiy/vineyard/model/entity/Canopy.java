@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Table(name = "canopies")
 public class Canopy extends BaseEntity {
 
+
     @Enumerated(EnumType.STRING)
     private CanopyStatus status;
-
-    private Bundle bundle_id;
+    private int rowNumber;
 
     private String comments;
 

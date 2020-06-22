@@ -1,5 +1,7 @@
 package com.vinickiy.vineyard.rows.services;
 
+import com.vinickiy.vineyard.canopies.services.CanopyService;
+import com.vinickiy.vineyard.model.dto.RowDto;
 import com.vinickiy.vineyard.model.entity.Row;
 import com.vinickiy.vineyard.rows.dao.RowsDao;
 import org.springframework.stereotype.Service;
@@ -12,19 +14,20 @@ import java.util.List;
 public class RowsService {
 
     private final RowsDao rowsDao;
-    private final BundleService bundleService;
+    private final CanopyService canopyService;
 
-    public RowsService(RowsDao rowsDao, BundleService bundleService) {
+    public RowsService(RowsDao rowsDao, CanopyService canopyService) {
         this.rowsDao = rowsDao;
-        this.bundleService = bundleService;
+        this.canopyService = canopyService;
     }
 
 
     @Transactional
     public @ResponseBody
-    Row save(Row row) {
-        bundleService.save(row);
-        return rowsDao.save(row); }
+    Row save(RowDto row) {
+        Row newRow = Row.builder().vineType(row.getTypeName()).rowNumber(row.getRowNumber()).build();
+        canopyService.createCanopiesForRow(row);
+        return rowsDao.save(newRow); }
 
 
     public List<Row> findAllRows(){
