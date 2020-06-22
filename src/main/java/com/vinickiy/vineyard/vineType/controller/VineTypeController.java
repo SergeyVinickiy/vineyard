@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 
 @Controller
 @RequestMapping("vineyard/v1/vineType")
@@ -36,8 +38,9 @@ public class VineTypeController {
     }
 
     @DeleteMapping
-    public void deleteById(@RequestParam(name = "id") long id) {
-        vineTypeService.deleteTypeById(id);
+    @ResponseStatus(OK)
+    public @ResponseBody String deleteById(@RequestParam(name = "id") long id) {
+        return vineTypeService.deleteTypeById(id);
     }
 
 }
