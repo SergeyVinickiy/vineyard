@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "rows")
 public class Row extends BaseEntity{

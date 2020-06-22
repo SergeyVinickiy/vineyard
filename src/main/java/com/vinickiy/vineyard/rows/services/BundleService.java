@@ -7,6 +7,7 @@ import com.vinickiy.vineyard.model.entity.Row;
 import org.springframework.stereotype.Service;
 
 @Service
+@Deprecated
 public class BundleService {
 
     private BundlesDao bundlesDao;

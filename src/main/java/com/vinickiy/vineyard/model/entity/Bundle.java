@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Deprecated
 @Setter
 @Getter
 @Builder

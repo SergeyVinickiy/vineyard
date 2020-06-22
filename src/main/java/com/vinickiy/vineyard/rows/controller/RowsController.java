@@ -1,5 +1,6 @@
 package com.vinickiy.vineyard.rows.controller;
 
+import com.vinickiy.vineyard.model.dto.RowDto;
 import com.vinickiy.vineyard.model.entity.Row;
 import com.vinickiy.vineyard.rows.services.RowsService;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,9 @@ public class RowsController {
 
     @PostMapping("/new")
     @ResponseStatus(CREATED)
-    public @ResponseBody Row createNewRow(@Valid @RequestBody Row Row) {
+    public @ResponseBody Row createNewRow(@Valid @RequestBody RowDto row) {
 
-        Row savedRow = rowsService.save(Row);
+        Row savedRow = rowsService.save(row);
         return savedRow;
 
     }
