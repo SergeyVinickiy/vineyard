@@ -4,7 +4,10 @@ import com.vinickiy.vineyard.canopies.dao.CanopiesDao;
 import com.vinickiy.vineyard.model.dto.CanopyDto;
 import com.vinickiy.vineyard.model.dto.RowDto;
 import com.vinickiy.vineyard.model.entity.Canopy;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static com.vinickiy.vineyard.model.entity.CanopyStatus.GOOD;
 
@@ -43,4 +46,11 @@ public class CanopyService {
         return newCanopy;
     }
 
+
+    public Canopy updateCanopy(Canopy canopy) {
+//TODO  do it from here)
+        Canopy canopyUpdated = canopy;
+
+
+    }
 }
