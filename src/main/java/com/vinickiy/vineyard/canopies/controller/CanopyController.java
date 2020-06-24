@@ -2,14 +2,13 @@ package com.vinickiy.vineyard.canopies.controller;
 
 
 import com.vinickiy.vineyard.canopies.services.CanopyService;
+import com.vinickiy.vineyard.errors.MissingEntityException;
+import com.vinickiy.vineyard.model.dto.CanopiesByRowRequest;
 import com.vinickiy.vineyard.model.dto.CanopyDto;
 import com.vinickiy.vineyard.model.entity.Canopy;
-import com.vinickiy.vineyard.model.entity.Row;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -35,20 +34,30 @@ public class CanopyController {
 
     }
 
-    //TODO Should add search with row number and return relevant canopies by specific row
-/*    @GetMapping
+
+    @GetMapping
     @ResponseStatus(OK)
-    public List<Canopy> getAllCanopies(int rowNumber){
+    public @ResponseBody Canopy getAllCanopies(@Valid @RequestBody CanopiesByRowRequest request){
+    try{
+        return canopyService.getCanopiesByRow(request.getRowNumber());
+    }
+        catch(NullPointerException e)
+        {
+        throw new MissingEntityException();
+    }
+    }
 
-        return canopyService.getAllCanopies(rowNumber);
-
-    }*/
 
     @PutMapping
     @ResponseStatus(OK)
-    public Canopy changeCanopyStatus(@Valid @RequestBody Canopy canopy){
+    public @ResponseBody Canopy changeCanopyStatus(@Valid @RequestBody Canopy canopy){
 
-        Canopy updatedCanopy = canopyService.updateCanopy(canopy);
-        return updatedCanopy;
+        try{
+        return canopyService.updateCanopy(canopy);
+        }
+        catch(NullPointerException e){
+            throw new MissingEntityException();
+        }
+
     }
 }
