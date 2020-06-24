@@ -4,10 +4,10 @@ import com.vinickiy.vineyard.canopies.dao.CanopiesDao;
 import com.vinickiy.vineyard.model.dto.CanopyDto;
 import com.vinickiy.vineyard.model.dto.RowDto;
 import com.vinickiy.vineyard.model.entity.Canopy;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.vinickiy.vineyard.model.entity.CanopyStatus.GOOD;
 
@@ -31,14 +31,15 @@ public class CanopyService {
 
     }
 
-    public Canopy createSingleCanopy(CanopyDto canopyDto){
+    public Canopy createSingleCanopy(CanopyDto canopyDto) {
 
         Canopy newCanopy = new Canopy();
-        if(canopyDto.getStatus() != null){
+        if (canopyDto.getStatus() != null) {
             newCanopy.setStatus(canopyDto.getStatus());
+        } else {
+            newCanopy.setStatus(GOOD);
         }
-        else{newCanopy.setStatus(GOOD);}
-        if(canopyDto.getComments() != null){
+        if (canopyDto.getComments() != null) {
             newCanopy.setComments(canopyDto.getComments());
         }
         newCanopy.setRowNumber(canopyDto.getRowNumber());
@@ -48,9 +49,14 @@ public class CanopyService {
 
 
     public Canopy updateCanopy(Canopy canopy) {
-//TODO  do it from here)
-        Canopy canopyUpdated = canopy;
+        //TODO  do it from here)
+        Optional<Canopy> canopyForUpdate = canopiesDao.findById(canopy.getId());
+        canopyForUpdate.orElse(null).setStatus(canopy.getStatus());
+        canopyForUpdate.orElse(null).setComments(canopy.getComments());
+        return canopiesDao.save(canopyForUpdate.orElse(null));
+    }
 
-
+    public Canopy getCanopiesByRow(int rowNumber){
+       return canopiesDao.findCanopiesByRowId(rowNumber);
     }
 }

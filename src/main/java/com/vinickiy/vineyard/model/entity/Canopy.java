@@ -20,4 +20,5 @@ public class Canopy extends BaseEntity {
     private String comments;
 
     // Picture
+
 }
