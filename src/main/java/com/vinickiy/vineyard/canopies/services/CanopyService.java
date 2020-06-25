@@ -49,14 +49,13 @@ public class CanopyService {
 
 
     public Canopy updateCanopy(Canopy canopy) {
-        //TODO  do it from here)
         Optional<Canopy> canopyForUpdate = canopiesDao.findById(canopy.getId());
         canopyForUpdate.orElse(null).setStatus(canopy.getStatus());
         canopyForUpdate.orElse(null).setComments(canopy.getComments());
         return canopiesDao.save(canopyForUpdate.orElse(null));
     }
 
-    public Canopy getCanopiesByRow(int rowNumber){
+    public List<Canopy> getCanopiesByRow(int rowNumber){
        return canopiesDao.findCanopiesByRowId(rowNumber);
     }
 }

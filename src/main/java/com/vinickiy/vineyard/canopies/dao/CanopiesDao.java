@@ -12,8 +12,7 @@ import java.util.List;
 @Repository
 public interface CanopiesDao extends CrudRepository<Canopy, Long> {
 
-    @Query(value = "SELECT c.id, c.status, c.comments, c.rowNumber, c.timeCreated, c.timeUpdated FROM Canopy c where (rowNumber = :rowNumber)")
-    Canopy findCanopiesByRowId(@Param("rowNumber") Integer rowNumber);
-
+    @Query(value = "SELECT c FROM Canopy c where rowNumber = :rowNumber")
+    List<Canopy> findCanopiesByRowId(@Param("rowNumber") int rowNumber);
 
 }
