@@ -37,7 +37,7 @@ public class CanopyController {
 
     @GetMapping
     @ResponseStatus(OK)
-    public @ResponseBody Canopy getAllCanopies(@Valid @RequestBody CanopiesByRowRequest request){
+    public @ResponseBody List<Canopy> getAllCanopies(@Valid @RequestBody CanopiesByRowRequest request){
     try{
         return canopyService.getCanopiesByRow(request.getRowNumber());
     }
