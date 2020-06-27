@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 
 @Controller
@@ -60,4 +61,11 @@ public class CanopyController {
         }
 
     }
+
+    @DeleteMapping
+    @ResponseStatus(NO_CONTENT)
+    public void deleteCanopy(@RequestParam(name = "canopyId") long canopyId){
+        canopyService.deleteCanopyById(canopyId);
+    }
+
 }

@@ -58,4 +58,9 @@ public class CanopyService {
     public List<Canopy> getCanopiesByRow(int rowNumber){
        return canopiesDao.findCanopiesByRowId(rowNumber);
     }
+
+    public void deleteCanopyById(long canopyId){
+        canopiesDao.deleteById(canopyId);
+    }
+
 }
