@@ -1,6 +1,7 @@
 package com.vinickiy.vineyard.canopies.services;
 
 import com.vinickiy.vineyard.canopies.dao.CanopiesDao;
+import com.vinickiy.vineyard.historyStatuses.HServices.HStatusesService;
 import com.vinickiy.vineyard.model.dto.CanopyDto;
 import com.vinickiy.vineyard.model.dto.RowDto;
 import com.vinickiy.vineyard.model.entity.Canopy;
@@ -15,9 +16,11 @@ import static com.vinickiy.vineyard.model.entity.CanopyStatus.GOOD;
 public class CanopyService {
 
     private CanopiesDao canopiesDao;
+    private HStatusesService hService;
 
-    public CanopyService(CanopiesDao canopiesDao) {
+    public CanopyService(CanopiesDao canopiesDao, HStatusesService hService) {
         this.canopiesDao = canopiesDao;
+        this.hService = hService;
     }
 
     public void createCanopiesForRow(RowDto rowDto) {
@@ -52,6 +55,7 @@ public class CanopyService {
         Optional<Canopy> canopyForUpdate = canopiesDao.findById(canopy.getId());
         canopyForUpdate.orElse(null).setStatus(canopy.getStatus());
         canopyForUpdate.orElse(null).setComments(canopy.getComments());
+        hService.statusChange(canopy);
         return canopiesDao.save(canopyForUpdate.orElse(null));
     }
 
