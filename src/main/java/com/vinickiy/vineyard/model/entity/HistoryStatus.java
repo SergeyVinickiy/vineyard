@@ -13,12 +13,12 @@ import javax.persistence.*;
 @Table(name = "history_data")
 public class HistoryStatus extends BaseEntity{
 
-    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "canopy_id")
-    private Canopy canopyId;
+/*    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "canopy_id")*/
+    private long canopyId;
 
     @Enumerated(EnumType.STRING)
-    private CanopyStatus status;
+    private CanopyStatus newStatus;
 
     private String comments;
 
