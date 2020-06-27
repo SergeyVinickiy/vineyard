@@ -25,9 +25,17 @@ public class RowsService {
     @Transactional
     public @ResponseBody
     Row save(RowDto row) {
+
+        Row existingRow = rowsDao.findRow(row.getRowNumber());
+        if(existingRow == null){
         Row newRow = Row.builder().vineType(row.getTypeName()).rowNumber(row.getRowNumber()).build();
         canopyService.createCanopiesForRow(row);
-        return rowsDao.save(newRow); }
+        return rowsDao.save(newRow);}
+        else{
+            canopyService.createCanopiesForRow(row);
+            return existingRow;
+        }
+    }
 
 
     public List<Row> findAllRows(){
