@@ -4,9 +4,9 @@ import com.vinickiy.vineyard.model.dto.RowDto;
 import com.vinickiy.vineyard.model.entity.Row;
 import com.vinickiy.vineyard.rows.services.RowsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 
 
@@ -32,9 +32,10 @@ public class RowsController {
 
 
     @GetMapping
-    public @ResponseBody
-    List<Row> getAllRows(){
-        return rowsService.findAllRows();
+    public
+    String getAllRows(Model model){
+        model.addAttribute("rows", rowsService.findAllRows());
+        return "allRows.html";
     }
 
 
