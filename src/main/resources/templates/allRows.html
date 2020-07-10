@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Rows</title>
+</head>
+
+
+<body>
+<table>
+<tr>
+<tr id="rows">
+    <thead>
+    <tr>
+        <th> Row Number </th>
+        <th> Vine Type </th>
+        <th> Created </th>
+    </thead>
+    </tr>
+    <tbody>
+    <tr th:each="row, rowStat: ${rows}">
+        <td th:text="${row?.rowNumber}">1</td>
+        <td th:text="${row?.vineType}">Shardone</td>
+        <td th:text="${row?.timeCreated}">10:21</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
