@@ -13,13 +13,15 @@ import javax.persistence.*;
 @Table(name = "canopies")
 public class Canopy extends BaseEntity {
 
-
+    private int rowNumber;
     @Enumerated(EnumType.STRING)
     private CanopyStatus status;
-    private int rowNumber;
     private String comments;
 
+    @Lob
+    @Column(name = "Image")
+    private byte[] image;
 
-    // Picture
+
 
 }

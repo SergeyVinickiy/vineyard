@@ -8,7 +8,10 @@ import com.vinickiy.vineyard.model.dto.CanopyDto;
 import com.vinickiy.vineyard.model.entity.Canopy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -66,6 +69,20 @@ public class CanopyController {
     @ResponseStatus(NO_CONTENT)
     public void deleteCanopy(@RequestParam(name = "canopyId") long canopyId){
         canopyService.deleteCanopyById(canopyId);
+    }
+
+    @PostMapping("/imageUpload")
+    @ResponseStatus(NO_CONTENT)
+    public void uploadPictureForCanopy(@RequestParam(name = "canopyId") long canopyId, @RequestParam("file") MultipartFile file) {
+
+        byte[] image = new byte[0];
+        try {
+            image = file.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        canopyService.saveImage(canopyId, image);
+
     }
 
 }

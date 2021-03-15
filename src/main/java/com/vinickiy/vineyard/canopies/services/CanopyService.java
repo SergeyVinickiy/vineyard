@@ -15,8 +15,8 @@ import static com.vinickiy.vineyard.model.entity.CanopyStatus.GOOD;
 @Service
 public class CanopyService {
 
-    private CanopiesDao canopiesDao;
-    private HStatusesService hService;
+    private final CanopiesDao canopiesDao;
+    private final HStatusesService hService;
 
     public CanopyService(CanopiesDao canopiesDao, HStatusesService hService) {
         this.canopiesDao = canopiesDao;
@@ -53,18 +53,36 @@ public class CanopyService {
 
     public Canopy updateCanopy(Canopy canopy) {
         Optional<Canopy> canopyForUpdate = canopiesDao.findById(canopy.getId());
-        canopyForUpdate.orElse(null).setStatus(canopy.getStatus());
-        canopyForUpdate.orElse(null).setComments(canopy.getComments());
+
+        if (!canopyForUpdate.isPresent()) {
+            throw new IllegalArgumentException("Canopy wasn't found");
+        }
+
+        canopyForUpdate.get().setStatus(canopy.getStatus());
+        canopyForUpdate.get().setComments(canopy.getComments());
         hService.statusChange(canopy);
-        return canopiesDao.save(canopyForUpdate.orElse(null));
+        return canopiesDao.save(canopyForUpdate.get());
+
     }
 
-    public List<Canopy> getCanopiesByRow(int rowNumber){
-       return canopiesDao.findCanopiesByRowId(rowNumber);
+    public List<Canopy> getCanopiesByRow(int rowNumber) {
+        return canopiesDao.findCanopiesByRowId(rowNumber);
     }
 
-    public void deleteCanopyById(long canopyId){
+    public void deleteCanopyById(long canopyId) {
         canopiesDao.deleteById(canopyId);
+    }
+
+    public void saveImage(long canopyId, byte[] image){
+        Optional<Canopy> canopyToAddImage = canopiesDao.findById(canopyId);
+
+        if (!canopyToAddImage.isPresent()) {
+            throw new IllegalArgumentException("Canopy wasn't found");
+        }
+
+        canopyToAddImage.get().setImage(image);
+        canopiesDao.save(canopyToAddImage.get());
+
     }
 
 }
